@@ -18,6 +18,11 @@ function AuthRoutes(){
             <AuthStack.Screen
                 name="SignUp"
                 component={SignUp}
+                options={{
+                    headerStyle:{
+                        backgroundColor:"#e48f4f"
+                    }
+                }}
             />
         </AuthStack.Navigator>
     )
