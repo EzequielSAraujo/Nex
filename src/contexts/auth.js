@@ -9,7 +9,7 @@ export const AuthContext =  createContext({});
 
 export default function AuthProvider({children}){
 
-    const [user, setUser] = useState('')
+    const [user, setUser] = useState(null)
 
     const navigation = useNavigation();
 
@@ -29,8 +29,32 @@ export default function AuthProvider({children}){
         }
     }
 
+    async function signIn(email, senha) {
+        
+        try{
+            const response = await api.post('/login',{
+                password: senha,
+                email: email,
+            })
+            const {id, name, token} = response.data
+            const data = {id, name, token, email}
+            api.defaults.headers["Authorization"] = `Bearer ${token}`
+            setUser({
+                id,
+                name, 
+                email,
+            })
+
+            
+            console.log("foi")
+
+        }catch(err){
+            console.log("Não foi", err)
+        }
+    }
+
     return(
-        <AuthContext.Provider value={{ user, signUp }}>
+        <AuthContext.Provider value={{ signed: !!user, user,signIn, signUp }}>
             {children}
         </AuthContext.Provider>
     )
