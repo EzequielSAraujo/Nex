@@ -16,7 +16,7 @@ export default function SignIn(){
 
     function hendle(){
         if(nome === '' || email === '' || email===""){
-            Alert.alert('algum campo está em branco o seu cego')
+            Alert.alert('Você deixou um campo em branco seu merda')
             return
         }
             
